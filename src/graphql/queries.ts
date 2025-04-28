@@ -8,27 +8,33 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getTodo = /* GraphQL */ `query GetTodo($id: ID!) {
-  getTodo(id: $id) {
+export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
+  getUser(id: $id) {
     id
-    name
-    description
+    username
+    profileImage
+    bio
+    links {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
   }
 }
-` as GeneratedQuery<APITypes.GetTodoQueryVariables, APITypes.GetTodoQuery>;
-export const listTodos = /* GraphQL */ `query ListTodos(
-  $filter: ModelTodoFilterInput
+` as GeneratedQuery<APITypes.GetUserQueryVariables, APITypes.GetUserQuery>;
+export const listUsers = /* GraphQL */ `query ListUsers(
+  $filter: ModelUserFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      name
-      description
+      username
+      profileImage
+      bio
       createdAt
       updatedAt
       __typename
@@ -37,4 +43,101 @@ export const listTodos = /* GraphQL */ `query ListTodos(
     __typename
   }
 }
-` as GeneratedQuery<APITypes.ListTodosQueryVariables, APITypes.ListTodosQuery>;
+` as GeneratedQuery<APITypes.ListUsersQueryVariables, APITypes.ListUsersQuery>;
+export const getLink = /* GraphQL */ `query GetLink($id: ID!) {
+  getLink(id: $id) {
+    id
+    title
+    url
+    userID
+    createdAt
+    updatedAt
+    userLinksId
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetLinkQueryVariables, APITypes.GetLinkQuery>;
+export const listLinks = /* GraphQL */ `query ListLinks(
+  $filter: ModelLinkFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listLinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      url
+      userID
+      createdAt
+      updatedAt
+      userLinksId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.ListLinksQueryVariables, APITypes.ListLinksQuery>;
+export const userByUsername = /* GraphQL */ `query UserByUsername(
+  $username: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  userByUsername(
+    username: $username
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      username
+      profileImage
+      bio
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.UserByUsernameQueryVariables,
+  APITypes.UserByUsernameQuery
+>;
+export const linksByUserID = /* GraphQL */ `query LinksByUserID(
+  $userID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelLinkFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  linksByUserID(
+    userID: $userID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      title
+      url
+      userID
+      createdAt
+      updatedAt
+      userLinksId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.LinksByUserIDQueryVariables,
+  APITypes.LinksByUserIDQuery
+>;

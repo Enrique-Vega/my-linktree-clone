@@ -8,45 +8,108 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateTodo = /* GraphQL */ `subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onCreateTodo(filter: $filter) {
+export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
+  onCreateUser(filter: $filter) {
     id
-    name
-    description
+    username
+    profileImage
+    bio
+    links {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateTodoSubscriptionVariables,
-  APITypes.OnCreateTodoSubscription
+  APITypes.OnCreateUserSubscriptionVariables,
+  APITypes.OnCreateUserSubscription
 >;
-export const onUpdateTodo = /* GraphQL */ `subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onUpdateTodo(filter: $filter) {
+export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
+  onUpdateUser(filter: $filter) {
     id
-    name
-    description
+    username
+    profileImage
+    bio
+    links {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateTodoSubscriptionVariables,
-  APITypes.OnUpdateTodoSubscription
+  APITypes.OnUpdateUserSubscriptionVariables,
+  APITypes.OnUpdateUserSubscription
 >;
-export const onDeleteTodo = /* GraphQL */ `subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onDeleteTodo(filter: $filter) {
+export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
+  onDeleteUser(filter: $filter) {
     id
-    name
-    description
+    username
+    profileImage
+    bio
+    links {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteTodoSubscriptionVariables,
-  APITypes.OnDeleteTodoSubscription
+  APITypes.OnDeleteUserSubscriptionVariables,
+  APITypes.OnDeleteUserSubscription
+>;
+export const onCreateLink = /* GraphQL */ `subscription OnCreateLink($filter: ModelSubscriptionLinkFilterInput) {
+  onCreateLink(filter: $filter) {
+    id
+    title
+    url
+    userID
+    createdAt
+    updatedAt
+    userLinksId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateLinkSubscriptionVariables,
+  APITypes.OnCreateLinkSubscription
+>;
+export const onUpdateLink = /* GraphQL */ `subscription OnUpdateLink($filter: ModelSubscriptionLinkFilterInput) {
+  onUpdateLink(filter: $filter) {
+    id
+    title
+    url
+    userID
+    createdAt
+    updatedAt
+    userLinksId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateLinkSubscriptionVariables,
+  APITypes.OnUpdateLinkSubscription
+>;
+export const onDeleteLink = /* GraphQL */ `subscription OnDeleteLink($filter: ModelSubscriptionLinkFilterInput) {
+  onDeleteLink(filter: $filter) {
+    id
+    title
+    url
+    userID
+    createdAt
+    updatedAt
+    userLinksId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteLinkSubscriptionVariables,
+  APITypes.OnDeleteLinkSubscription
 >;
