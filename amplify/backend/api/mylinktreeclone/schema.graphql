@@ -8,7 +8,7 @@ type User @model {
   username: String! @index(name: "byUsername", queryField: "userByUsername")
   profileImage: String
   bio: String
-  links: [Link] @hasMany
+  links: [Link] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
 type Link @model {

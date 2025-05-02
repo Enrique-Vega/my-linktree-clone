@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { LinkCard } from '@/components/LinkCard';
-import Image from "next/image";
 import { generateClient } from '@aws-amplify/api';
 import { userByUsername } from "@/graphql/queries"; // import the real query
 import { useEffect, useState } from "react";
 
 const client = generateClient();
+console.log("client: ", client);
 
 interface Link {
     id: string;
@@ -33,7 +33,8 @@ export default function UsernamePage() {
 
     useEffect(() => {
         // ⏳ If username hasn't loaded yet, don't run anything
-        if (!username) return;
+        if (!router.isReady || !username) return;
+        console.log("Username from router:", username);
 
         // 📡 Fetch user data from AWS Amplify GraphQL
         const fetchUser = async () => {
@@ -41,11 +42,15 @@ export default function UsernamePage() {
                 // 🛰️ Send GraphQL request to fetch user by username
                 const result: any = await client.graphql({
                     query: userByUsername,
-                    variables: { username },
+                    variables: { username }
                 });
+
+                console.log("GraphQL result:", result);
 
                 // 🧹 Extract the first user returned (should only be one)
                 const fetchedUser = result.data.userByUsername.items[0];
+
+                console.log("fetchedUser: ", fetchedUser);
 
                 if (!fetchedUser) {
                     // ❌ If no user is found, mark as "not found"
@@ -65,10 +70,10 @@ export default function UsernamePage() {
         };
 
         fetchUser();
-    }, [username]);
+    }, [router.isReady, username]);
 
-    console.log("notFound: ", notFound)
-    console.log("loading: ", loading)
+    // console.log("notFound: ", notFound)
+    // console.log("loading: ", loading)
     console.log("user: ", user)
 
     if (loading) {
@@ -91,26 +96,26 @@ export default function UsernamePage() {
             <div className="flex flex-col items-center mb-10">
                 {/* Profile Picture */}
                 <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
-                    <Image
-                        src={user.profileImage || "https://via.placeholder.com/150"}
+                    <img
+                        src={user?.profileImage || "https://via.placeholder.com/150"}
                         width={100}
                         height={100}
-                        alt="Profile"
+                        alt="Profile image"
                     />
                 </div>
 
                 {/* Username */}
-                <h1 className="text-white text-2xl font-bold mb-2">@{user.username}</h1>
+                <h1 className="text-white text-2xl font-bold mb-2">@{user?.username}</h1>
 
                 {/* Bio */}
                 <p className="text-white text-center max-w-xs">
-                    {user.bio || "no bio available"}
+                    {user?.bio || "no bio available"}
                 </p>
             </div>
 
             {/* --- Link List --- */}
             <div className="flex flex-col gap-5 w-full max-w-md">
-                {user.links?.items.map((link, index) => (
+                {user?.links?.items.map((link, index) => (
                     <LinkCard key={index} title={link.title} url={link.url} />
                 ))}
             </div>

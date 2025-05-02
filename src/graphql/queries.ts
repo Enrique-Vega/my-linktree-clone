@@ -2,7 +2,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from '../API';
 type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryInput: InputType;
   __generatedQueryOutput: OutputType;
@@ -78,33 +78,25 @@ export const listLinks = /* GraphQL */ `query ListLinks(
   }
 }
 ` as GeneratedQuery<APITypes.ListLinksQueryVariables, APITypes.ListLinksQuery>;
-export const userByUsername = /* GraphQL */ `query UserByUsername(
-  $username: String!
-  $sortDirection: ModelSortDirection
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  userByUsername(
-    username: $username
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      username
-      profileImage
-      bio
-      createdAt
-      updatedAt
-      __typename
+export const userByUsername = /* GraphQL */ `
+  query UserByUsername($username: String!) {
+      userByUsername(username: $username) {
+        items {
+          id
+          username
+          profileImage
+          bio
+          links {
+            items {
+              id
+              title
+              url
+              userID
+            }
+          }
+        }
+      }
     }
-    nextToken
-    __typename
-  }
-}
 ` as GeneratedQuery<
   APITypes.UserByUsernameQueryVariables,
   APITypes.UserByUsernameQuery
