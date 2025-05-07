@@ -24,6 +24,7 @@ export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
   }
 }
 ` as GeneratedQuery<APITypes.GetUserQueryVariables, APITypes.GetUserQuery>;
+
 export const listUsers = /* GraphQL */ `query ListUsers(
   $filter: ModelUserFilterInput
   $limit: Int
@@ -44,6 +45,7 @@ export const listUsers = /* GraphQL */ `query ListUsers(
   }
 }
 ` as GeneratedQuery<APITypes.ListUsersQueryVariables, APITypes.ListUsersQuery>;
+
 export const getLink = /* GraphQL */ `query GetLink($id: ID!) {
   getLink(id: $id) {
     id
@@ -57,6 +59,7 @@ export const getLink = /* GraphQL */ `query GetLink($id: ID!) {
   }
 }
 ` as GeneratedQuery<APITypes.GetLinkQueryVariables, APITypes.GetLinkQuery>;
+
 export const listLinks = /* GraphQL */ `query ListLinks(
   $filter: ModelLinkFilterInput
   $limit: Int
@@ -70,7 +73,6 @@ export const listLinks = /* GraphQL */ `query ListLinks(
       userID
       createdAt
       updatedAt
-      userLinksId
       __typename
     }
     nextToken
@@ -78,6 +80,7 @@ export const listLinks = /* GraphQL */ `query ListLinks(
   }
 }
 ` as GeneratedQuery<APITypes.ListLinksQueryVariables, APITypes.ListLinksQuery>;
+
 export const userByUsername = /* GraphQL */ `
   query UserByUsername($username: String!) {
       userByUsername(username: $username) {
@@ -101,6 +104,7 @@ export const userByUsername = /* GraphQL */ `
   APITypes.UserByUsernameQueryVariables,
   APITypes.UserByUsernameQuery
 >;
+
 export const linksByUserID = /* GraphQL */ `query LinksByUserID(
   $userID: ID!
   $sortDirection: ModelSortDirection

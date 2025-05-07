@@ -2,7 +2,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from '../API';
 type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationInput: InputType;
   __generatedMutationOutput: OutputType;
@@ -85,7 +85,6 @@ export const createLink = /* GraphQL */ `mutation CreateLink(
     userID
     createdAt
     updatedAt
-    userLinksId
     __typename
   }
 }
@@ -102,10 +101,6 @@ export const updateLink = /* GraphQL */ `mutation UpdateLink(
     title
     url
     userID
-    createdAt
-    updatedAt
-    userLinksId
-    __typename
   }
 }
 ` as GeneratedMutation<
@@ -123,7 +118,6 @@ export const deleteLink = /* GraphQL */ `mutation DeleteLink(
     userID
     createdAt
     updatedAt
-    userLinksId
     __typename
   }
 }

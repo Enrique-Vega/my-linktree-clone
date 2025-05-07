@@ -5,7 +5,6 @@ import { userByUsername } from "@/graphql/queries"; // import the real query
 import { useEffect, useState } from "react";
 
 const client = generateClient();
-console.log("client: ", client);
 
 interface Link {
     id: string;

@@ -20,40 +20,53 @@ export default function AdminDashboard() {
         fetchLinks();
     }, []);
 
+    // LIST ALL LINKS
     const fetchLinks = async () => {
         try {
             const result: any = await client.graphql({
                 query: listLinks,
+                authMode: 'apiKey'
             });
             setLinks(result.data.listLinks.items);
+
         } catch (error) {
             console.error('Error fetching links:', error);
         }
     };
+    console.log("setLinks: ", links);
 
+    // CREATE LINKS
     const handleCreateLink = async () => {
+        if (!title || !url) return;
         try {
             await client.graphql({
                 query: createLink,
                 variables: {
-                    input: { title, url, userID: 'manual-user-id' }, // <- TEMP hardcoded userID
+                    input: {
+                        title,
+                        url,
+                        userID: '5a480f10-9d21-4cab-9838-d2c71012a2f7'
+                    }, // <- TEMP hardcoded userID
                 },
+                authMode: 'apiKey'
             });
             setTitle('');
             setUrl('');
-            fetchLinks(); // Refresh list
+            await fetchLinks(); // Refresh list
         } catch (error) {
             console.error('Error creating link:', error);
         }
     };
 
+    // DELETE LINKS
     const handleDeleteLink = async (id: string) => {
         try {
             await client.graphql({
                 query: deleteLink,
                 variables: { input: { id } },
+                authMode: 'apiKey'
             });
-            fetchLinks(); // Refresh list
+            await fetchLinks(); // Refresh list
         } catch (error) {
             console.error('Error deleting link:', error);
         }
