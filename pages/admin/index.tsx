@@ -1,7 +1,8 @@
-import { generateClient } from '@aws-amplify/api';
 import { createLink, deleteLink } from '@/graphql/mutations';
 import { listLinks } from '@/graphql/queries';
 import { useEffect, useState } from 'react';
+import { client } from '@/components/amplifyClient';
+import { LinkEditor } from '@/components/LinkEditor';
 
 interface Link {
     id: string;
@@ -9,7 +10,7 @@ interface Link {
     url: string;
 }
 
-const client = generateClient();
+// const client = generateClient();
 
 export default function AdminDashboard() {
     const [links, setLinks] = useState<Link[]>([]);
@@ -33,7 +34,6 @@ export default function AdminDashboard() {
             console.error('Error fetching links:', error);
         }
     };
-    console.log("setLinks: ", links);
 
     // CREATE LINKS
     const handleCreateLink = async () => {
@@ -74,7 +74,7 @@ export default function AdminDashboard() {
 
     return (
         <div className="min-h-screen p-8 bg-gray-50">
-            <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
+            <h1 className="text-3xl font-bold mb-6">My Page</h1>
 
             <div className="mb-8">
                 <input
@@ -98,18 +98,16 @@ export default function AdminDashboard() {
 
             <div className="space-y-4">
                 {links.map((link) => (
-                    <div key={link.id} className="p-4 bg-white rounded shadow flex justify-between items-center">
-                        <div>
-                            <div className="font-bold">{link.title}</div>
-                            <div className="text-gray-500 text-sm">{link.url}</div>
-                        </div>
-                        <button
-                            onClick={() => handleDeleteLink(link.id)}
-                            className="bg-red-400 text-white px-3 py-1 rounded"
-                        >
-                            Delete
-                        </button>
-                    </div>
+                    <LinkEditor
+                        key={link.id}
+                        link={link}
+                        onUpdate={(updated: any) => {
+                            setLinks((prev) =>
+                                prev.map((l) => (l.id === updated.id ? updated : l))
+                            );
+                        }}
+                        deleteLink={() => handleDeleteLink(link.id)}
+                    />
                 ))}
             </div>
         </div>

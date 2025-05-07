@@ -30,6 +30,7 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
   APITypes.CreateUserMutationVariables,
   APITypes.CreateUserMutation
 >;
+
 export const updateUser = /* GraphQL */ `mutation UpdateUser(
   $input: UpdateUserInput!
   $condition: ModelUserConditionInput
@@ -52,6 +53,7 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
   APITypes.UpdateUserMutationVariables,
   APITypes.UpdateUserMutation
 >;
+
 export const deleteUser = /* GraphQL */ `mutation DeleteUser(
   $input: DeleteUserInput!
   $condition: ModelUserConditionInput
@@ -74,6 +76,7 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
   APITypes.DeleteUserMutationVariables,
   APITypes.DeleteUserMutation
 >;
+
 export const createLink = /* GraphQL */ `mutation CreateLink(
   $input: CreateLinkInput!
   $condition: ModelLinkConditionInput
@@ -92,6 +95,7 @@ export const createLink = /* GraphQL */ `mutation CreateLink(
   APITypes.CreateLinkMutationVariables,
   APITypes.CreateLinkMutation
 >;
+
 export const updateLink = /* GraphQL */ `mutation UpdateLink(
   $input: UpdateLinkInput!
   $condition: ModelLinkConditionInput
@@ -101,12 +105,16 @@ export const updateLink = /* GraphQL */ `mutation UpdateLink(
     title
     url
     userID
+    createdAt
+    updatedAt
+    __typename
   }
 }
 ` as GeneratedMutation<
   APITypes.UpdateLinkMutationVariables,
   APITypes.UpdateLinkMutation
 >;
+
 export const deleteLink = /* GraphQL */ `mutation DeleteLink(
   $input: DeleteLinkInput!
   $condition: ModelLinkConditionInput

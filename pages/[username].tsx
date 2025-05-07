@@ -3,8 +3,9 @@ import { LinkCard } from '@/components/LinkCard';
 import { generateClient } from '@aws-amplify/api';
 import { userByUsername } from "@/graphql/queries"; // import the real query
 import { useEffect, useState } from "react";
+import { client } from '@/components/amplifyClient';
 
-const client = generateClient();
+// const client = generateClient();
 
 interface Link {
     id: string;
@@ -33,7 +34,6 @@ export default function UsernamePage() {
     useEffect(() => {
         // ⏳ If username hasn't loaded yet, don't run anything
         if (!router.isReady || !username) return;
-        console.log("Username from router:", username);
 
         // 📡 Fetch user data from AWS Amplify GraphQL
         const fetchUser = async () => {
@@ -41,10 +41,11 @@ export default function UsernamePage() {
                 // 🛰️ Send GraphQL request to fetch user by username
                 const result: any = await client.graphql({
                     query: userByUsername,
-                    variables: { username }
+                    variables: { username },
+                    authMode: 'apiKey'
                 });
 
-                console.log("GraphQL result:", result);
+                console.log("result", result);
 
                 // 🧹 Extract the first user returned (should only be one)
                 const fetchedUser = result.data.userByUsername.items[0];
